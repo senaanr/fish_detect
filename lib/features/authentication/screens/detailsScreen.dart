@@ -80,12 +80,12 @@ class DetailsScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: _buildInfoContainer('Min Boyut',
-                        observation['poisonous'] == 'true' ? 'Evet' : 'Hayır'),
+                        observation['poisonous'] == 'true' ? '50 cm' : '50 cm'),
                   ),
                   SizedBox(width: 10.0),
                   Expanded(
                     child: _buildInfoContainer('Max Boyut',
-                        observation['endangered'] == 'true' ? 'Evet' : 'Hayır'),
+                        observation['endangered'] == 'true' ? '150 cm' : '150 cm'),
                   ),
                 ],
               ),

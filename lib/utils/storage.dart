@@ -17,7 +17,6 @@ class Storage {
     try {
       final file = await _localFile;
 
-      // Dosya var mı kontrol edin
       if (await file.exists()) {
         final contents = await file.readAsString();
         return List<Map<String, String>>.from(json.decode(contents));

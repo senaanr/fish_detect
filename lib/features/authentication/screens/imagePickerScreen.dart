@@ -209,13 +209,23 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> with SingleTicker
   }
 
   void _processImage() {
-    // Simulate image processing and set outputs
     setState(() {
       _outputs = [
-        {'index': 0, 'label': 'Akya Balığı'}
-      ]; // Replace with actual image processing logic
-      // After processing, navigate to the FishDetectScreen
-      Get.to(FishDetectScreen());
+        {
+          'index': 0,
+          'label': 'Akya Balığı',
+          'info': 'Akya Balığı bilgisi burada olacak.',
+          'image': image?.path ?? '',
+        }
+      ];
+
+      if (_outputs != null && _outputs!.isNotEmpty) {
+        Get.to(FishDetectScreen(
+          detectedFishName: _outputs![0]['label'] ?? 'Unknown Fish',
+          detectedFishInfo: _outputs![0]['info'] ?? 'No information available',
+          detectedFishImage: _outputs![0]['image'] ?? '',
+        ));
+      }
     });
   }
 
@@ -311,7 +321,11 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> with SingleTicker
                 margin: const EdgeInsets.only(bottom: 30),
                 child: InkWell(
                   onTap: () {
-                    Get.to(FishDetectScreen());
+                    Get.to(FishDetectScreen(
+                      detectedFishName: _outputs![0]['label'],
+                      detectedFishInfo: _outputs![0]['info'],
+                      detectedFishImage: _outputs![0]['image'],
+                    ));
                   },
                   child: Container(
                     width: 300,
@@ -323,7 +337,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> with SingleTicker
                     child: Center(
                       child: Text(
                         _outputs![0]["index"] != 9
-                            ? _outputs![0]["label"].substring(2)
+                            ? _outputs![0]["label"]
                             : "Balık Tanınamadı",
                         style: const TextStyle(
                           fontSize: 20,
